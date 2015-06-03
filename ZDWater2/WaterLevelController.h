@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  WaterLevelController.h
 //  ZDWater2
 //
 //  Created by teddy on 15/6/3.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface WaterLevelController : UIViewController
 
 @end
-
