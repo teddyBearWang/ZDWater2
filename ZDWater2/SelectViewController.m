@@ -40,6 +40,7 @@
     [self.navigationItem setHidesBackButton:YES]; //设置返回按钮为隐藏
     self.tableView = [[UITableView alloc] initWithFrame:(CGRect){0,0,self.view
         .frame.size} style:UITableViewStylePlain];
+    self.tableView.rowHeight = 44;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];

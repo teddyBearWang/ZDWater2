@@ -12,6 +12,7 @@
 #import "RainCell.h"
 #import "RainObject.h"
 #import "UIView+RootView.h"
+#import "SVProgressHUD.h"
 
 @interface RainViewController ()<UITableViewDataSource,UITableViewDelegate,SelectItemsDelegate>
 {
@@ -26,6 +27,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+ 
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     //强制屏幕横屏
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
         SEL selector = NSSelectorFromString(@"setOrientation:");
@@ -43,6 +50,7 @@
     // Do any additional setup after loading the view.
     self.title = @"实时水情";
     
+    self.myTableView.rowHeight = 44;
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
     
@@ -50,6 +58,7 @@
     NSString *date_str = [self requestDate:now];
     
     BOOL ret = [RainObject fetchWithType:@"GetYqInfo" withArea:@"33" withDate:date_str withstart:@"0" withEnd:@"10000"];
+    [SVProgressHUD showWithStatus:@"加载中..."];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = (CGRect){0,0,60,40};
     [btn setCorners:5.0];
@@ -98,6 +107,7 @@
 {
     NSArray *array = (NSArray *)notification.object;
     listData = [NSMutableArray arrayWithArray:array];
+    [SVProgressHUD dismissWithSuccess:@"加载成功"];
     [self.myTableView reloadData];
     
 }

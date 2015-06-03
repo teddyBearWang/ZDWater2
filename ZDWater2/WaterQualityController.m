@@ -14,6 +14,7 @@
 #import "QualityDetaiObject.h"
 #import "CustomDateActionSheet.h"
 #import "ChartViewController.h"
+#import "SVProgressHUD.h"
 
 @interface WaterQualityController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 {
@@ -50,12 +51,12 @@
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
     NSDate *now = [NSDate date];
+    self.myTableView.rowHeight = 44;
+
     NSArray *dates =(NSArray *)[self getRequestDates:now];
     
-    BOOL ret = [WaterQuality FetchWithType:@"GetSzInfo" withStrat:[dates objectAtIndex:0] withEnd:[dates objectAtIndex:1]];
-    if (ret) {
-        listData = [WaterQuality RequestData];
-    }
+    //异步加载网络数据
+    [self getWebData:dates];
     
     UIButton *selectTime_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     selectTime_btn.frame = (CGRect){0,0,60,40};
@@ -67,6 +68,29 @@
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:selectTime_btn];
     self.navigationItem.rightBarButtonItem = item;
 
+}
+
+- (void)getWebData:(NSArray *)dates
+{
+    [SVProgressHUD showWithStatus:@"加载中.."];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if ([WaterQuality FetchWithType:@"GetSzInfo" withStrat:[dates objectAtIndex:0] withEnd:[dates objectAtIndex:1]]) {
+            //加载成功，主线程更新UI
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //进入到主线程中，更新UI
+                [SVProgressHUD dismissWithSuccess:@"加载成功"];
+                listData = [WaterQuality RequestData];
+                [self.myTableView reloadData];
+            });
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //获取网络数据失败
+                [SVProgressHUD dismissWithError:@"加载失败"];
+                listData = [NSArray arrayWithObject:@"当前无网络数据"];
+                [self.myTableView reloadData];
+            });
+        }
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,12 +138,8 @@
         
         NSDate *time = [self getDateFromString:sheet.selectedTime];
         NSArray *dates =(NSArray *)[self getRequestDates:time];
-        BOOL ret = [WaterQuality FetchWithType:@"GetSzInfo" withStrat:[dates objectAtIndex:0] withEnd:[dates objectAtIndex:1]];
-        if (ret) {
-            listData = [WaterQuality RequestData];
-        }
-        [self.myTableView reloadData];
-    }
+        [self getWebData:dates];
+   }
 }
 
 #pragma mark - UITableViewDataSource
@@ -133,7 +153,7 @@
 {
     WaterCell *cell = (WaterCell *)[tableView dequeueReusableCellWithIdentifier:@"WaterCell"];
     if (cell == nil) {
-        cell = (WaterCell *)[[[NSBundle mainBundle] loadNibNamed:@"WaterCell" owner:nil options:nil] lastObject];
+        cell = (WaterCell *)[[[NSBundle mainBundle] loadNibNamed:@"WaterCell" owner:self options:nil] lastObject];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     NSDictionary *dic = [listData objectAtIndex:indexPath.row];
@@ -168,6 +188,4 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
-
 @end

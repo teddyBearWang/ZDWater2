@@ -80,6 +80,8 @@
 		9F3852C11B1EA7AC005E3B8B /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3852BF1B1EA7AC005E3B8B /* left.png */; };
 		9F3852C21B1EA7AC005E3B8B /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3852C01B1EA7AC005E3B8B /* right.png */; };
 		9F3852C61B1EA93B005E3B8B /* QualityDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3852C51B1EA93B005E3B8B /* QualityDetailController.m */; };
+		9F3852CB1B1ED662005E3B8B /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9F3852C81B1ED662005E3B8B /* SVProgressHUD.bundle */; };
+		9F3852CC1B1ED662005E3B8B /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3852CA1B1ED662005E3B8B /* SVProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,6 +222,9 @@
 		9F3852C01B1EA7AC005E3B8B /* right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right.png; sourceTree = "<group>"; };
 		9F3852C41B1EA93B005E3B8B /* QualityDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QualityDetailController.h; sourceTree = "<group>"; };
 		9F3852C51B1EA93B005E3B8B /* QualityDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QualityDetailController.m; sourceTree = "<group>"; };
+		9F3852C81B1ED662005E3B8B /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		9F3852C91B1ED662005E3B8B /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		9F3852CA1B1ED662005E3B8B /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +288,7 @@
 				9F3851FF1B1E8B05005E3B8B /* Main.storyboard */,
 				9F3852241B1E96E5005E3B8B /* items */,
 				9F3851E01B1E8A14005E3B8B /* Images.xcassets */,
+				9F3852C71B1ED662005E3B8B /* SVProgressHUD */,
 				9F38526B1B1E9EC7005E3B8B /* ASIHttpRequest */,
 				9F3852651B1E9E39005E3B8B /* Until */,
 				9F3851D31B1E8A14005E3B8B /* Supporting Files */,
@@ -514,6 +520,16 @@
 			name = waterQuality;
 			sourceTree = "<group>";
 		};
+		9F3852C71B1ED662005E3B8B /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				9F3852C81B1ED662005E3B8B /* SVProgressHUD.bundle */,
+				9F3852C91B1ED662005E3B8B /* SVProgressHUD.h */,
+				9F3852CA1B1ED662005E3B8B /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -615,6 +631,7 @@
 				9F3852001B1E8B05005E3B8B /* Main.storyboard in Resources */,
 				9F38521D1B1E9304005E3B8B /* weather.png in Resources */,
 				9F38521A1B1E9304005E3B8B /* water.png in Resources */,
+				9F3852CB1B1ED662005E3B8B /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +652,7 @@
 				9F3851D91B1E8A14005E3B8B /* AppDelegate.m in Sources */,
 				9F3852B01B1EA077005E3B8B /* WaterSituation.m in Sources */,
 				9F38525E1B1E9E20005E3B8B /* UUBar.m in Sources */,
+				9F3852CC1B1ED662005E3B8B /* SVProgressHUD.m in Sources */,
 				9F3852861B1E9EC7005E3B8B /* ASIDownloadCache.m in Sources */,
 				9F3852841B1E9EC7005E3B8B /* ASIDataCompressor.m in Sources */,
 				9F3852B11B1EA077005E3B8B /* WaterYield.m in Sources */,

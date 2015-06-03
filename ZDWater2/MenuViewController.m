@@ -23,6 +23,12 @@
 
 @implementation MenuViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationItem setHidesBackButton:YES];
+}
+
 //按钮初始化
 - (void)buttonSetting{
     NSArray *btns = @[_noticafionBtn,_rainBtn,_waterLevelBtn,_waterQualitybtn,_waterYieldBtn,_gateBtn,_waterLevelBtn,

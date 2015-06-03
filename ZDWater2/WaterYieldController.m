@@ -11,6 +11,7 @@
 #import "CustomHeaderView.h"
 #import "WaterCell.h"
 #import "UUChart.h"
+#import "SVProgressHUD.h"
 
 @interface WaterYieldController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -43,21 +44,52 @@ static BOOL ret = NO;
     // Do any additional setup after loading the view.
     self.title = @"实时水量";
     
+    self.myTableView.rowHeight = 44;
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
     
     self.tableBtn.selected = YES;//默认是选择状态的
 
+//    NSDate *data = [NSDate date];
+//    NSString *date_str = [self getStringWithDate:data];
+//    ret = [WaterYield fetchWithType:@"GetSlInfo" date:date_str];
+//    if (ret) {
+//        listData = [WaterYield requestWithDatas];
+//    }
+//    if (listData.count == 0) {
+//        ret = NO;
+//        listData = [NSArray arrayWithObject:@"当前暂无数据信息"];
+    
+//    }
+    [self getWebData];
+}
+
+//异步加载网络数据
+- (void)getWebData
+{
     NSDate *data = [NSDate date];
     NSString *date_str = [self getStringWithDate:data];
-    ret = [WaterYield fetchWithType:@"GetSlInfo" date:date_str];
-    if (ret) {
-        listData = [WaterYield requestWithDatas];
-    }
-    if (listData.count == 0) {
-        ret = NO;
-        listData = [NSArray arrayWithObject:@"当前暂无数据信息"];
-    }
+    [SVProgressHUD showWithStatus:@"加载中.."];
+    //创建队列，进行异步加载数据
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        ret = [WaterYield fetchWithType:@"GetSlInfo" date:date_str];
+        if (ret) {
+            //获取网络数据
+            [SVProgressHUD dismissWithSuccess:@"加载成功"];
+            //进入到主线程进行更新UI
+            dispatch_async(dispatch_get_main_queue(), ^{
+                listData = [WaterYield requestWithDatas];
+                if(listData.count == 0){
+                    listData = [NSArray arrayWithObject:@"当前无数据"];
+                }
+                [self.myTableView reloadData];
+            });
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismissWithError:@"加载失败"];
+            });
+        }
+    });
 }
 
 //根据时间格式化时间字符串

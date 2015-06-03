@@ -11,6 +11,7 @@
 #import "WaterCell.h"
 #import "GateObject.h"
 #import "ChartViewController.h"
+#import "SVProgressHUD.h"
 
 @interface GateViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -25,6 +26,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.myTableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     //强制屏幕横屏
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
         SEL selector = NSSelectorFromString(@"setOrientation:");
@@ -35,8 +42,6 @@
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
     }
-    
-    [self.myTableView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -44,13 +49,26 @@
     // Do any additional setup after loading the view.
     self.title = @"实时闸门开度";
     
+    self.myTableView.rowHeight = 44;
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
     
-    BOOL ret = [GateObject fetchWithType:@"GetZmInfo"];
-    if (ret) {
-        listData = [GateObject requestGateDatas];
-    }
+    [SVProgressHUD showWithStatus:@"加载中.."];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if ([GateObject fetchWithType:@"GetZmInfo"]) {
+            //获取网络数据成功
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismissWithSuccess:@"加载成功"];
+                listData = [GateObject requestGateDatas];
+                [self.myTableView reloadData];
+            });
+        }else{
+            //获取网络数据失败
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismissWithError:@"加载失败"];
+            });
+        }
+    });
 
 }
 

@@ -10,6 +10,7 @@
 #import "UUChart.h"
 #import "ChartObject.h"
 #import "DoubleChartObject.h"
+#import "SVProgressHUD.h"
 
 @interface ChartViewController ()<UUChartDataSource>
 {
@@ -40,7 +41,7 @@
     
     //保存下屏幕竖着的时候的高度
     screen_heiht = self.view.frame.size.height;
-    [self initChartView];
+    
 }
 
 //创建chartVIew
@@ -72,23 +73,56 @@
     self.navigationItem.rightBarButtonItem = item;
     
     NSString *date_str = [self requestDate:[NSDate date]];
-    BOOL ret ;
     if (self.functionType == FunctionDoubleChart) {
         //表示折线图上多条线
-        ret = [DoubleChartObject fetchDOubleChartDataWithType:self.requestType stcd:self.stcd WithDate:date_str];
-        if (ret) {
-            x_Labels = [NSArray arrayWithArray:[DoubleChartObject requestXLables]];
-            y_Values = [NSArray arrayWithArray:(NSArray *)[DoubleChartObject requestYValues]];
-        }
+        [self refreshDoubleDate:date_str];
     }else{
         //表示折线图上单条线
-        ret = [ChartObject fetcChartDataWithType:self.requestType stcd:self.stcd WithDate:date_str];
-        if (ret) {
-            x_Labels = [NSArray arrayWithArray:[ChartObject requestXLables]];
-            y_Values = [NSArray arrayWithArray:(NSArray *)[ChartObject requestYValues]];
-        }
+        [self refreshUIWithSingleChartDate:date_str];
     }
 
+}
+
+//画单线
+- (void)refreshUIWithSingleChartDate:(NSString *)date
+{
+    [SVProgressHUD show];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if ([ChartObject fetcChartDataWithType:self.requestType stcd:self.stcd WithDate:date]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //
+                [SVProgressHUD dismiss];
+                x_Labels = [NSArray arrayWithArray:[DoubleChartObject requestXLables]];
+                y_Values = [NSArray arrayWithArray:(NSArray *)[DoubleChartObject requestYValues]];
+                [self initChartView];
+            });
+        }else{
+          dispatch_async(dispatch_get_main_queue(), ^{
+              [SVProgressHUD dismissWithError:nil];
+          });
+        }
+    });
+}
+
+//画双线
+- (void)refreshDoubleDate:(NSString *)date
+{
+    [SVProgressHUD show];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if ([DoubleChartObject fetchDOubleChartDataWithType:self.requestType stcd:self.stcd WithDate:date]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //
+                [SVProgressHUD dismiss];
+                x_Labels = [NSArray arrayWithArray:[DoubleChartObject requestXLables]];
+                y_Values = [NSArray arrayWithArray:(NSArray *)[DoubleChartObject requestYValues]];
+                [self initChartView];
+            });
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismissWithError:nil];
+            });
+        }
+    });
 }
 
 - (UIView *)createSelectTimeView
@@ -158,13 +192,12 @@
         _showTimeLabel.text = [self requestDate:next_date];
     }
     
-    BOOL ret = [ChartObject fetcChartDataWithType:self.requestType stcd:self.stcd WithDate:_showTimeLabel.text];
-    if (ret) {
-        x_Labels = (NSArray *)[ChartObject requestXLables];
-        y_Values = (NSArray *)[ChartObject requestYValues];
+    if (self.functionType == FunctionDoubleChart){
+        //表示折线图上多条线
+        [self refreshDoubleDate:_showTimeLabel.text];
+    }else{
+        [self refreshUIWithSingleChartDate:_showTimeLabel.text];
     }
-    
-    [self initChartView];
 }
 
 #pragma mark - UUChartDataSource

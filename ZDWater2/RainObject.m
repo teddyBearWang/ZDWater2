@@ -28,7 +28,6 @@
             ret = YES;
             NSData *json = (NSData *)request.responseData;
             NSArray *jsonArr = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableLeaves error:nil];
-          //  rainData = jsonArr;
             
             //抛出去一个通知
             [[NSNotificationCenter defaultCenter] postNotificationName:kLoadCompleteNotification object:jsonArr];

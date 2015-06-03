@@ -27,6 +27,8 @@
     LoginViewController *login = (LoginViewController *)[story instantiateViewControllerWithIdentifier:@"login"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
     nav.navigationBar.barTintColor = [UIColor colorWithRed:20/255.0 green:112/255.0 blue:253/255.0 alpha:0.8];
+    nav.navigationBar.tintColor = [UIColor whiteColor]; //设置返回按钮字体颜色
+    nav.interactivePopGestureRecognizer.enabled = NO;//禁止左滑手势
     self.window.rootViewController = nav;
     
     return YES;

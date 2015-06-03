@@ -11,6 +11,7 @@
 #import "WaterSituation.h"
 #import "WaterCell.h"
 #import "ChartViewController.h"
+#import "SVProgressHUD.h"
 
 @interface WaterLevelController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -25,6 +26,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.myTableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     //强制屏幕横屏
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
         SEL selector = NSSelectorFromString(@"setOrientation:");
@@ -35,7 +42,6 @@
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
     }
-    [self.myTableView reloadData];
 }
 
 static BOOL ret = NO;
@@ -46,16 +52,44 @@ static BOOL ret = NO;
     
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
+    self.myTableView.rowHeight = 44;
+
+    
+    [self refresh];
+}
+
+- (void)refresh
+{
     NSDate *now = [NSDate date];
     NSString *date_str = [self getStringWithDate:now];
-    ret = [WaterSituation fetchWithType:@"GetSqInfo" area:@"33" date:date_str start:@"0" end:@"10000"];
-    if (ret) {
+    [SVProgressHUD showWithStatus:@"加载中.."];
+    //创建一个队列
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if ([WaterSituation fetchWithType:@"GetSqInfo" area:@"33" date:date_str start:@"0" end:@"10000"]) {
+            //请求网络成功之后，在主线程更新UI
+            [self updateUI];
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //进入到主线程，更新UI
+                [SVProgressHUD dismissWithError:@"加载失败"];
+            });
+        }
+    });
+}
+
+//主线程更新UI
+- (void)updateUI
+{
+    [SVProgressHUD dismissWithSuccess:@"加载成功"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //
         waterLevels = [WaterSituation requestWaterData];
-    }
-    if (waterLevels.count == 0) {
-        ret = NO;
-        waterLevels = [NSArray arrayWithObject:@"当前暂无水情数据"];
-    }
+        if (waterLevels.count == 0) {
+            ret = NO;
+            waterLevels = [NSArray arrayWithObject:@"当前暂无水情数据"];
+        }
+        [self.myTableView reloadData];
+    });
 }
 
 //根据时间格式化时间字符串
