@@ -41,6 +41,7 @@
     
     //保存下屏幕竖着的时候的高度
     screen_heiht = self.view.frame.size.height;
+    [self initChartView];
     
 }
 
@@ -75,12 +76,19 @@
     NSString *date_str = [self requestDate:[NSDate date]];
     if (self.functionType == FunctionDoubleChart) {
         //表示折线图上多条线
-        [self refreshDoubleDate:date_str];
+        if ([DoubleChartObject fetchDOubleChartDataWithType:self.requestType stcd:self.stcd WithDate:date_str]) {
+            x_Labels = [NSArray arrayWithArray:[DoubleChartObject requestXLables]];
+            y_Values = [NSArray arrayWithArray:(NSArray *)[DoubleChartObject requestYValues]];
+        }
     }else{
         //表示折线图上单条线
-        [self refreshUIWithSingleChartDate:date_str];
+       // [self refreshUIWithSingleChartDate:date_str];
+        if ([ChartObject fetcChartDataWithType:self.requestType stcd:self.stcd WithDate:date_str]) {
+            x_Labels = [NSArray arrayWithArray:[ChartObject requestXLables]];
+            y_Values = [NSArray arrayWithArray:(NSArray *)[ChartObject requestYValues]];
+        }
     }
-
+    
 }
 
 //画单线
@@ -94,7 +102,7 @@
                 [SVProgressHUD dismiss];
                 x_Labels = [NSArray arrayWithArray:[DoubleChartObject requestXLables]];
                 y_Values = [NSArray arrayWithArray:(NSArray *)[DoubleChartObject requestYValues]];
-                [self initChartView];
+                
             });
         }else{
           dispatch_async(dispatch_get_main_queue(), ^{
@@ -116,6 +124,7 @@
                 x_Labels = [NSArray arrayWithArray:[DoubleChartObject requestXLables]];
                 y_Values = [NSArray arrayWithArray:(NSArray *)[DoubleChartObject requestYValues]];
                 [self initChartView];
+
             });
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{

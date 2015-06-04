@@ -70,6 +70,7 @@
 
 }
 
+static BOOL ret = NO;
 - (void)getWebData:(NSArray *)dates
 {
     [SVProgressHUD showWithStatus:@"加载中.."];
@@ -80,12 +81,14 @@
                 //进入到主线程中，更新UI
                 [SVProgressHUD dismissWithSuccess:@"加载成功"];
                 listData = [WaterQuality RequestData];
+                ret = YES;
                 [self.myTableView reloadData];
             });
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 //获取网络数据失败
                 [SVProgressHUD dismissWithError:@"加载失败"];
+                ret = NO;
                 listData = [NSArray arrayWithObject:@"当前无网络数据"];
                 [self.myTableView reloadData];
             });
@@ -151,16 +154,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WaterCell *cell = (WaterCell *)[tableView dequeueReusableCellWithIdentifier:@"WaterCell"];
-    if (cell == nil) {
-        cell = (WaterCell *)[[[NSBundle mainBundle] loadNibNamed:@"WaterCell" owner:self options:nil] lastObject];
+    if (ret) {
+        WaterCell *cell = (WaterCell *)[tableView dequeueReusableCellWithIdentifier:@"WaterCell"];
+        if (cell == nil) {
+            cell = (WaterCell *)[[[NSBundle mainBundle] loadNibNamed:@"WaterCell" owner:self options:nil] lastObject];
+        }
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        NSDictionary *dic = [listData objectAtIndex:indexPath.row];
+        cell.stationName.text = [[dic objectForKey:@"CZMC"] isEqual:@""] ? @"--" : [dic objectForKey:@"CZMC"];
+        cell.lastestLevel.text = [[dic objectForKey:@"SZDJ"] isEqual:@""] ? @"--" : [dic objectForKey:@"JD"];
+        cell.warnWater.text = [[dic objectForKey:@"WD1"] isEqual:@""] ? @"--" : [dic objectForKey:@"WD"];
+        return cell;
+    }else{
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyCell"];
+        }
+        cell.textLabel.text = listData[0];
+        return cell;
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    NSDictionary *dic = [listData objectAtIndex:indexPath.row];
-    cell.stationName.text = [[dic objectForKey:@"CZMC"] isEqual:@""] ? @"--" : [dic objectForKey:@"CZMC"];
-    cell.lastestLevel.text = [[dic objectForKey:@"SZDJ"] isEqual:@""] ? @"--" : [dic objectForKey:@"JD"];
-    cell.warnWater.text = [[dic objectForKey:@"WD1"] isEqual:@""] ? @"--" : [dic objectForKey:@"WD"];
-    return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

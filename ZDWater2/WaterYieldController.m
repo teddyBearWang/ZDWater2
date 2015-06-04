@@ -35,7 +35,6 @@
     [super viewWillAppear:animated];
  
     [self.myTableView reloadData];
-    [self initChartView];
 }
 
 static BOOL ret = NO;
@@ -83,6 +82,7 @@ static BOOL ret = NO;
                     listData = [NSArray arrayWithObject:@"当前无数据"];
                 }
                 [self.myTableView reloadData];
+                [self initChartView];
             });
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
