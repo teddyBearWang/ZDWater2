@@ -16,7 +16,7 @@
 + (BOOL)fetchWithType:(NSString *)type area:(NSString *)adcd date:(NSString *)date start:(NSString *)start end:(NSString *)end
 {
     __block BOOL ret = NO;
-   // NSString *url_str = [NSString stringWithFormat:@"%@t=%@&results=%@$%@$%@$%@",URL,type,adcd,date,start,end];
+  //  NSString *url_str = [NSString stringWithFormat:@"%@t=%@&results=%@$%@$%@$%@",URL,type,adcd,date,start,end];
     NSString *result = [NSString stringWithFormat:@"%@$%@$%@$%@",adcd,date,start,end];
     NSURL *url = [NSURL URLWithString:URL];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

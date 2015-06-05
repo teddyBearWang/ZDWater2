@@ -40,7 +40,7 @@
         [invocation invoke];
     }
     
-    [self.myTableView reloadData];
+   // [self.myTableView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -59,10 +59,10 @@
     [self getWebData:dates];
     
     UIButton *selectTime_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    selectTime_btn.frame = (CGRect){0,0,60,40};
+    selectTime_btn.frame = (CGRect){0,0,20,20};
     selectTime_btn.backgroundColor = [UIColor clearColor];
     selectTime_btn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [selectTime_btn setTitle:@"时间选择" forState:UIControlStateNormal];
+    [selectTime_btn setBackgroundImage:[UIImage imageNamed:@"select"] forState:UIControlStateNormal];
     [selectTime_btn addTarget:self action:@selector(selectTimeAction:) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:selectTime_btn];
@@ -122,8 +122,8 @@ static BOOL ret = NO;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *date = [formatter dateFromString:str];
-    NSDate *date1 = [date dateByAddingTimeInterval:24*60*60];//由于存在时间差，实际的日期应该加上1
-    return date1;
+   // NSDate *date1 = [date dateByAddingTimeInterval:24*60*60];//由于存在时间差，实际的日期应该加上1
+    return date;
 }
 
 //时间选择

@@ -23,12 +23,18 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     LoginViewController *login = (LoginViewController *)[story instantiateViewControllerWithIdentifier:@"login"];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
-    nav.navigationBar.barTintColor = [UIColor colorWithRed:20/255.0 green:112/255.0 blue:253/255.0 alpha:0.8];
+    nav.navigationBar.barTintColor = [UIColor colorWithRed:4/255.0 green:17/255.0 blue:49/255.0 alpha:1];
     nav.navigationBar.tintColor = [UIColor whiteColor]; //设置返回按钮字体颜色
     nav.interactivePopGestureRecognizer.enabled = NO;//禁止左滑手势
+    //修改title颜色
+    [nav.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    //设置navigationbar的颜色不为模糊
+    nav.navigationBar.translucent = NO;
     self.window.rootViewController = nav;
     
     return YES;

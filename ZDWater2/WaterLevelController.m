@@ -12,8 +12,9 @@
 #import "WaterCell.h"
 #import "ChartViewController.h"
 #import "SVProgressHUD.h"
+#import "CustomDateActionSheet.h"
 
-@interface WaterLevelController ()<UITableViewDelegate,UITableViewDataSource>
+@interface WaterLevelController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
 {
     NSArray *waterLevels; //水情数据源
 }
@@ -26,12 +27,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.myTableView reloadData];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     //强制屏幕横屏
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
         SEL selector = NSSelectorFromString(@"setOrientation:");
@@ -44,6 +39,8 @@
     }
 }
 
+
+
 static BOOL ret = NO;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,19 +50,37 @@ static BOOL ret = NO;
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
     self.myTableView.rowHeight = 44;
-
     
-    [self refresh];
+    UIButton *select_time = [UIButton buttonWithType:UIButtonTypeCustom];
+    select_time.frame = (CGRect){0,0,20,20};
+    select_time.backgroundColor = [UIColor clearColor];
+    select_time.titleLabel.font = [UIFont systemFontOfSize:14];
+    [select_time setBackgroundImage:[UIImage imageNamed:@"select"] forState:UIControlStateNormal];
+    [select_time addTarget:self action:@selector(selectTimeAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:select_time];
+    self.navigationItem.rightBarButtonItem = item;
+
+    NSDate *now = [NSDate date];
+//    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+//    NSInteger interval = [zone secondsFromGMTForDate:now];
+//    NSDate *localDate = [now dateByAddingTimeInterval:interval];
+    NSString *date_str = [self getStringWithDate:now];
+    [self refresh:date_str];
 }
 
-- (void)refresh
+- (void)selectTimeAction:(UIButton *)btn
 {
-    NSDate *now = [NSDate date];
-    NSString *date_str = [self getStringWithDate:now];
+    CustomDateActionSheet *sheet = [[CustomDateActionSheet alloc] initWithTitle:@"时间选择" delegate:self];
+    [sheet showInView:self.view];
+}
+
+- (void)refresh:(NSString *)date
+{
     [SVProgressHUD showWithStatus:@"加载中.."];
     //创建一个队列
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if ([WaterSituation fetchWithType:@"GetSqInfo" area:@"33" date:date_str start:@"0" end:@"10000"]) {
+        if ([WaterSituation fetchWithType:@"GetSqInfo" area:@"33" date:date start:@"0" end:@"10000"]) {
             //请求网络成功之后，在主线程更新UI
             [self updateUI];
         }else{
@@ -84,6 +99,7 @@ static BOOL ret = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
         //
         waterLevels = [WaterSituation requestWaterData];
+        ret = YES;
         if (waterLevels.count == 0) {
             ret = NO;
             waterLevels = [NSArray arrayWithObject:@"当前暂无水情数据"];
@@ -101,10 +117,41 @@ static BOOL ret = NO;
     return date_str;
 }
 
+//格式化选择时间字符串
+- (NSString *)getStringWithSelectDate:(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *str = [formatter stringFromDate:date];
+    NSString *date_str = [NSString stringWithFormat:@"%@ 23:59:59",str];
+    return date_str;
+}
+
+//将时间字符串格式化为时间
+- (NSDate *)dateFromDateString:(NSString *)dateStr
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *date = [formatter dateFromString:dateStr];
+    return date;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        CustomDateActionSheet *sheet = (CustomDateActionSheet *)actionSheet;
+        NSDate *date = [self dateFromDateString:sheet.selectedTime];
+        NSString *str_time = [self getStringWithSelectDate:date];
+        [self refresh:str_time];
+    }
+}
+
 
 #pragma mark - UITableViewDataSource
 

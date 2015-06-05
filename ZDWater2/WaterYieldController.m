@@ -48,18 +48,15 @@ static BOOL ret = NO;
     self.myTableView.dataSource = self;
     
     self.tableBtn.selected = YES;//默认是选择状态的
-
-//    NSDate *data = [NSDate date];
-//    NSString *date_str = [self getStringWithDate:data];
-//    ret = [WaterYield fetchWithType:@"GetSlInfo" date:date_str];
-//    if (ret) {
-//        listData = [WaterYield requestWithDatas];
-//    }
-//    if (listData.count == 0) {
-//        ret = NO;
-//        listData = [NSArray arrayWithObject:@"当前暂无数据信息"];
     
-//    }
+    UISegmentedControl *seg = [[UISegmentedControl alloc] initWithItems:@[@"水量列表",@"水量图表"]];
+    seg.segmentedControlStyle = UISegmentedControlStyleBar;
+    seg.selectedSegmentIndex = 0;
+    seg.multipleTouchEnabled = NO;
+    [seg addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+    seg.apportionsSegmentWidthsByContent = YES;
+    self.navigationItem.titleView = seg;
+    
     [self getWebData];
 }
 
@@ -78,11 +75,14 @@ static BOOL ret = NO;
             //进入到主线程进行更新UI
             dispatch_async(dispatch_get_main_queue(), ^{
                 listData = [WaterYield requestWithDatas];
-                if(listData.count == 0){
+                if(listData.count != 0){
+                    //当数据源不为0的时候划折线图
+                    [self initChartView];
+                }else{
+                    ret = NO;
                     listData = [NSArray arrayWithObject:@"当前无数据"];
                 }
                 [self.myTableView reloadData];
-                [self initChartView];
             });
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -101,6 +101,22 @@ static BOOL ret = NO;
     return date_str;
 }
 
+//切换
+- (void)segmentAction:(UISegmentedControl *)seg
+{
+    if (seg.selectedSegmentIndex == 0) {
+        //列表
+        self.chartBtn.selected = NO;
+        chart_bg_view.hidden = YES;
+        self.myTableView.hidden = NO;
+    }else{
+        //图表
+        self.tableBtn.selected = NO;
+        self.myTableView.hidden = YES;
+        chart_bg_view.hidden = NO;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -110,7 +126,7 @@ static BOOL ret = NO;
 - (void)initChartView
 {
     
-    chart_bg_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 40)];
+    chart_bg_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 10)];
     [self.view addSubview:chart_bg_view];
     if (chartView) {
         [chartView removeFromSuperview];
@@ -154,7 +170,7 @@ static BOOL ret = NO;
         return cell;
     }else{
         //无数据
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WaterCell"];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.textLabel.text = [listData objectAtIndex:0];
         return cell;
     }
@@ -178,31 +194,6 @@ static BOOL ret = NO;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-
-//切换到列表模式
-- (IBAction)tableSelectedAction:(id)sender
-{
-    UIButton *btn = (UIButton *)sender;
-    if (!btn.selected) {
-        btn.selected = YES;
-        self.chartBtn.selected = NO;
-        chart_bg_view.hidden = YES;
-        self.myTableView.hidden = NO;
-    }
-}
-
-//切换到图表模式
-- (IBAction)chartSelectedAction:(id)sender
-{
-    UIButton *btn = (UIButton *)sender;
-    if (!btn.selected) {
-        btn.selected = YES;
-        self.tableBtn.selected = NO;
-        self.myTableView.hidden = YES;
-        chart_bg_view.hidden = NO;
-    }
-}
-
 #pragma mark - UUChartDataSource
 
 //横坐标标题数组
@@ -220,14 +211,14 @@ static BOOL ret = NO;
 //数值多重数组
 - (NSArray *)UUChart_yValueArray:(UUChart *)chart
 {
-    NSMutableArray *y_realAry = [NSMutableArray arrayWithCapacity:listData.count];
-    NSMutableArray *y_planAry = [NSMutableArray arrayWithCapacity:listData.count];
-    for (int i=0; i<listData.count; i++) {
-        NSDictionary *dic = [listData objectAtIndex:i];
-        [y_realAry addObject:[dic objectForKey:@"realVal"]];
-        [y_planAry addObject:[dic objectForKey:@"planVal"]];
-    }
-    return @[y_realAry,y_planAry];
+        NSMutableArray *y_realAry = [NSMutableArray arrayWithCapacity:listData.count];
+        NSMutableArray *y_planAry = [NSMutableArray arrayWithCapacity:listData.count];
+        for (int i=0; i<listData.count; i++) {
+            NSDictionary *dic = [listData objectAtIndex:i];
+            [y_realAry addObject:[dic objectForKey:@"realVal"]];
+            [y_planAry addObject:[dic objectForKey:@"planVal"]];
+        }
+        return @[y_realAry,y_planAry];
 }
 
 //颜色数组

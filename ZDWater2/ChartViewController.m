@@ -41,6 +41,10 @@
     
     //保存下屏幕竖着的时候的高度
     screen_heiht = self.view.frame.size.height;
+    if (y_Values.count == 0 || x_Labels.count == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"当前没有可以显示的图表数据" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }
     [self initChartView];
     
 }
@@ -91,6 +95,7 @@
     
 }
 
+/*
 //画单线
 - (void)refreshUIWithSingleChartDate:(NSString *)date
 {
@@ -133,6 +138,8 @@
         }
     });
 }
+ 
+ */
 
 - (UIView *)createSelectTimeView
 {
@@ -154,6 +161,7 @@
     
     _showTimeLabel = [[UILabel alloc] initWithFrame:(CGRect){20,0,80,30}];
     _showTimeLabel.backgroundColor = [UIColor clearColor];
+    _showTimeLabel.textColor = [UIColor whiteColor];
     _showTimeLabel.text = [self requestDate:[NSDate date]];
     _showTimeLabel.font = [UIFont systemFontOfSize:15];
     [bg_view addSubview:_showTimeLabel];
@@ -201,12 +209,20 @@
         _showTimeLabel.text = [self requestDate:next_date];
     }
     
-    if (self.functionType == FunctionDoubleChart){
+    if (self.functionType == FunctionDoubleChart) {
         //表示折线图上多条线
-        [self refreshDoubleDate:_showTimeLabel.text];
+        if ([DoubleChartObject fetchDOubleChartDataWithType:self.requestType stcd:self.stcd WithDate:_showTimeLabel.text]) {
+            x_Labels = [NSArray arrayWithArray:[DoubleChartObject requestXLables]];
+            y_Values = [NSArray arrayWithArray:(NSArray *)[DoubleChartObject requestYValues]];
+        }
     }else{
-        [self refreshUIWithSingleChartDate:_showTimeLabel.text];
+        //表示折线图上单条线
+        if ([ChartObject fetcChartDataWithType:self.requestType stcd:self.stcd WithDate:_showTimeLabel.text]) {
+            x_Labels = [NSArray arrayWithArray:[ChartObject requestXLables]];
+            y_Values = [NSArray arrayWithArray:(NSArray *)[ChartObject requestYValues]];
+        }
     }
+
 }
 
 #pragma mark - UUChartDataSource

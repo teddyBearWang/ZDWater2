@@ -27,11 +27,13 @@
     self.keyLabel.textAlignment = NSTextAlignmentCenter;
     self.keyLabel.backgroundColor = [UIColor clearColor];
     self.keyLabel.font = [UIFont systemFontOfSize:15];
+    self.keyLabel.textColor = [UIColor colorWithRed:63/255.0 green:69/255.0 blue:81/255.0 alpha:1.0];
     [self.contentView addSubview:self.keyLabel];
 
     self.valueLabel = [[UILabel alloc] init];
     self.valueLabel.backgroundColor = [UIColor clearColor];
     self.valueLabel.font = [UIFont systemFontOfSize:15];
+    self.valueLabel.textColor = [UIColor colorWithRed:63/255.0 green:69/255.0 blue:81/255.0 alpha:1.0];
     [self.contentView addSubview:self.valueLabel];
 }
 

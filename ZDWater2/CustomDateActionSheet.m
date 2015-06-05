@@ -25,7 +25,7 @@
         self.datePicker.tag = 200;
         self.datePicker.minimumDate = [NSDate dateWithTimeIntervalSinceNow:-60*60*24*365*10];
         self.datePicker.maximumDate = [NSDate date];
-        self.datePicker.date = [NSDate dateWithTimeIntervalSinceNow:-60*60*24];
+       // self.datePicker.date = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
     }
     return self;
 }

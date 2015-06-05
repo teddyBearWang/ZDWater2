@@ -17,7 +17,7 @@
     NSURL *url = [NSURL URLWithString:URL];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostValue:type forKey:@"t"];
-    
+    request.timeOutSeconds = 15;
     [request setCompletionBlock:^{
         //成功
         if (request.responseStatusCode == 200) {
@@ -30,6 +30,7 @@
     
     [request setFailedBlock:^{
         //失败
+        ret = NO;
     }];
     
     [request startSynchronous];

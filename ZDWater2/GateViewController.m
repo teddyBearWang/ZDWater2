@@ -36,7 +36,7 @@
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
     }
-    [self.myTableView reloadData];
+   // [self.myTableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -67,6 +67,9 @@
             //获取网络数据失败
             dispatch_async(dispatch_get_main_queue(), ^{
                 [SVProgressHUD dismissWithError:@"加载失败"];
+                listData = [GateObject requestGateDatas];
+                NSLog(@"-------------->>>>>>>>>>>%@",listData);
+                [self.myTableView reloadData];
             });
         }
     });

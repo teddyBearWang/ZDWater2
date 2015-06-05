@@ -20,6 +20,7 @@
     
     NSString *url_str = [NSString stringWithFormat:@"%@t=%@&results=%@$%@$%@$%@",URL,type,adcd,date,start,end];
     NSURL *url = [NSURL URLWithString:url_str];
+    
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     
     [request setCompletionBlock:^{
@@ -44,13 +45,5 @@
     
     return ret;
 }
-
-/*
-static NSArray *rainData = nil;
-+ (NSArray *)requestRainData
-{
-    return rainData;
-}
- */
 
 @end

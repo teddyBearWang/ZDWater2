@@ -72,9 +72,15 @@
 //确定
 - (void)comfirmAction:(UIButton *)button
 {
-    [self.navigationController popViewControllerAnimated:YES];
-    //代理传值
-    [self.delegate selectItemAction:_selectArea];
+    if(_selectArea.length != 0){
+        [self.navigationController popViewControllerAnimated:YES];
+        //代理传值
+        [self.delegate selectItemAction:_selectArea];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"请选择其中某一个区域" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
 }
 
 //取消
@@ -104,21 +110,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    /*
-     //多选
-    if (_selectItems == nil) {
-        _selectItems = [NSMutableArray arrayWithCapacity:dataSource.count];
-    }
-    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        [_selectItems removeObject:area];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }else{
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        //添加到数组
-        [_selectItems addObject:area];
-    }
-     */
     //不是第一次选中
     if (_selectedRow >= 0) {
         
