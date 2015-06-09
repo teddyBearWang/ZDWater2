@@ -95,6 +95,10 @@
 		9F3FE8E91B219B8D00CC49F4 /* sunTocloudy.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F3FE8DF1B219B8D00CC49F4 /* sunTocloudy.png */; };
 		9F3FE8ED1B219C3300CC49F4 /* WeatherObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FE8EC1B219C3300CC49F4 /* WeatherObject.m */; };
 		9F3FE8EF1B219D2400CC49F4 /* tq.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9F3FE8EE1B219D2400CC49F4 /* tq.jpg */; };
+		9F9158FD1B25415300CFA0DB /* qixiang.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F9158FC1B25415300CFA0DB /* qixiang.png */; };
+		9F9159001B2541C800CFA0DB /* QiXiangController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9158FF1B2541C800CFA0DB /* QiXiangController.m */; };
+		9F9159041B25444600CFA0DB /* QixiangDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9159031B25444600CFA0DB /* QixiangDetailController.m */; };
+		9F9159071B25581600CFA0DB /* QiXiangObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9159061B25581600CFA0DB /* QiXiangObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,6 +256,13 @@
 		9F3FE8EB1B219C3300CC49F4 /* WeatherObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherObject.h; sourceTree = "<group>"; };
 		9F3FE8EC1B219C3300CC49F4 /* WeatherObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherObject.m; sourceTree = "<group>"; };
 		9F3FE8EE1B219D2400CC49F4 /* tq.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tq.jpg; sourceTree = "<group>"; };
+		9F9158FC1B25415300CFA0DB /* qixiang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qixiang.png; sourceTree = "<group>"; };
+		9F9158FE1B2541C800CFA0DB /* QiXiangController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiXiangController.h; sourceTree = "<group>"; };
+		9F9158FF1B2541C800CFA0DB /* QiXiangController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiXiangController.m; sourceTree = "<group>"; };
+		9F9159021B25444600CFA0DB /* QixiangDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QixiangDetailController.h; sourceTree = "<group>"; };
+		9F9159031B25444600CFA0DB /* QixiangDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QixiangDetailController.m; sourceTree = "<group>"; };
+		9F9159051B25581600CFA0DB /* QiXiangObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiXiangObject.h; sourceTree = "<group>"; };
+		9F9159061B25581600CFA0DB /* QiXiangObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiXiangObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -354,6 +365,7 @@
 		9F3852071B1E92A6005E3B8B /* images */ = {
 			isa = PBXGroup;
 			children = (
+				9F9158FC1B25415300CFA0DB /* qixiang.png */,
 				9F3FE8D71B219B8D00CC49F4 /* cloudy.png */,
 				9F3FE8D81B219B8D00CC49F4 /* foggy.png */,
 				9F3FE8D91B219B8D00CC49F4 /* rainy.png */,
@@ -387,6 +399,7 @@
 		9F3852241B1E96E5005E3B8B /* items */ = {
 			isa = PBXGroup;
 			children = (
+				9F9159011B25442E00CFA0DB /* QixiangGuotu */,
 				9F3852BE1B1EA4D8005E3B8B /* chartView */,
 				9F38523E1B1E9CED005E3B8B /* CustomCell */,
 				9F3852371B1E9C82005E3B8B /* xib */,
@@ -460,6 +473,8 @@
 				9F3852A81B1EA077005E3B8B /* WaterYield.m */,
 				9F3FE8EB1B219C3300CC49F4 /* WeatherObject.h */,
 				9F3FE8EC1B219C3300CC49F4 /* WeatherObject.m */,
+				9F9159051B25581600CFA0DB /* QiXiangObject.h */,
+				9F9159061B25581600CFA0DB /* QiXiangObject.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -569,6 +584,17 @@
 				9F3852CA1B1ED662005E3B8B /* SVProgressHUD.m */,
 			);
 			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		9F9159011B25442E00CFA0DB /* QixiangGuotu */ = {
+			isa = PBXGroup;
+			children = (
+				9F9158FE1B2541C800CFA0DB /* QiXiangController.h */,
+				9F9158FF1B2541C800CFA0DB /* QiXiangController.m */,
+				9F9159021B25444600CFA0DB /* QixiangDetailController.h */,
+				9F9159031B25444600CFA0DB /* QixiangDetailController.m */,
+			);
+			name = QixiangGuotu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -681,6 +707,7 @@
 				9F3852001B1E8B05005E3B8B /* Main.storyboard in Resources */,
 				9F38521D1B1E9304005E3B8B /* weather.png in Resources */,
 				9F3FE8D61B21965D00CC49F4 /* select.png in Resources */,
+				9F9158FD1B25415300CFA0DB /* qixiang.png in Resources */,
 				9F38521A1B1E9304005E3B8B /* water.png in Resources */,
 				9F3852CB1B1ED662005E3B8B /* SVProgressHUD.bundle in Resources */,
 				9F3FE8EF1B219D2400CC49F4 /* tq.jpg in Resources */,
@@ -720,6 +747,7 @@
 				9F3852031B1E8DC4005E3B8B /* RainViewController.m in Sources */,
 				9F38525F1B1E9E20005E3B8B /* UUBarChart.m in Sources */,
 				9F3852AD1B1EA077005E3B8B /* QualityDetaiObject.m in Sources */,
+				9F9159041B25444600CFA0DB /* QixiangDetailController.m in Sources */,
 				9F3852B51B1EA0DA005E3B8B /* SelectViewController.m in Sources */,
 				9F3852331B1E97AF005E3B8B /* ContactViewController.m in Sources */,
 				9F3852611B1E9E20005E3B8B /* UUChartLabel.m in Sources */,
@@ -735,6 +763,7 @@
 				9F3852AB1B1EA077005E3B8B /* DoubleChartObject.m in Sources */,
 				9F3852301B1E978E005E3B8B /* GateViewController.m in Sources */,
 				9F3852361B1E97CA005E3B8B /* WeatherViewController.m in Sources */,
+				9F9159001B2541C800CFA0DB /* QiXiangController.m in Sources */,
 				9F3FE8ED1B219C3300CC49F4 /* WeatherObject.m in Sources */,
 				9F3852491B1E9D4A005E3B8B /* CustomHeaderView.m in Sources */,
 				9F38528B1B1E9EC7005E3B8B /* Reachability.m in Sources */,
@@ -750,6 +779,7 @@
 				9F3852631B1E9E20005E3B8B /* UULineChart.m in Sources */,
 				9F38528A1B1E9EC7005E3B8B /* ASINetworkQueue.m in Sources */,
 				9F3852851B1E9EC7005E3B8B /* ASIDataDecompressor.m in Sources */,
+				9F9159071B25581600CFA0DB /* QiXiangObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

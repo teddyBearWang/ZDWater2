@@ -42,8 +42,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = BG_COLOR;
-    
+    //系统的版本号
+    NSString *version = [NSString stringWithFormat:@"v%.1lf",[[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey] floatValue]];
+    self.title = [NSString stringWithFormat:@"浙东引水 %@",version];
     [self buttonSetting];
+    
+    //修改返回按钮
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"返回";
+    self.navigationItem.backBarButtonItem = backItem;
 }
 
 - (void)didReceiveMemoryWarning {

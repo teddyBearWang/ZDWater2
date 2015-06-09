@@ -91,6 +91,7 @@
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
                 [SVProgressHUD dismissWithError:nil];
+                [self updateUI];
             });
         }
     });

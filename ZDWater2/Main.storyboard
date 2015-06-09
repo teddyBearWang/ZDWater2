@@ -233,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V3s-7T-W0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-524" y="1093"/>
+            <point key="canvasLocation" x="-625" y="1093"/>
         </scene>
         <!--Weather View Controller-->
         <scene sceneID="Fgi-NU-Foe">
@@ -255,7 +255,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2015-06-06" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0j2-Yb-Ra6">
                                         <rect key="frame" x="35" y="10" width="90" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -263,14 +263,14 @@
                                         <rect key="frame" x="50" y="34" width="60" height="60"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="多云 29~20℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiV-jd-KkI">
-                                        <rect key="frame" x="8" y="102" width="144" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <rect key="frame" x="0.0" y="102" width="160" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="东南风转微风" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xo-ie-MqF">
                                         <rect key="frame" x="8" y="123" width="144" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -283,8 +283,8 @@
                                 <rect key="frame" x="0.0" y="408" width="160" height="160"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="多云 29~20℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEn-yr-xne">
-                                        <rect key="frame" x="8" y="102" width="144" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <rect key="frame" x="0.0" y="102" width="160" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -293,13 +293,13 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2015-06-06" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lV8-4j-F6r">
                                         <rect key="frame" x="27" y="10" width="107" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="东南风转微风" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kl4-p2-lM8">
                                         <rect key="frame" x="8" y="123" width="144" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -387,7 +387,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fjM-sk-IpL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-134" y="1082"/>
+            <point key="canvasLocation" x="-264" y="1093"/>
         </scene>
         <!--Gate View Controller-->
         <scene sceneID="Oud-Ko-BaE">
@@ -415,7 +415,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="geX-YQ-nSu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="1093"/>
+            <point key="canvasLocation" x="70" y="1093"/>
+        </scene>
+        <!--Qi Xiang Controller-->
+        <scene sceneID="Beh-Ei-f9p">
+            <objects>
+                <viewController id="KYn-AD-83l" customClass="QiXiangController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ab7-PB-Bgo"/>
+                        <viewControllerLayoutGuide type="bottom" id="XHN-lN-mRC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9S5-iF-mAP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="TWz-hM-khX">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="eLP-Ij-VVt"/>
+                    <connections>
+                        <outlet property="myTableView" destination="TWz-hM-khX" id="Cjs-gj-4Ad"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QJr-xp-z14" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="414" y="1085"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="YtE-Wi-n1Y">
@@ -618,7 +646,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RuG-sD-TkW">
                                 <rect key="frame" x="229" y="327" width="70" height="90"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="设置" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iW8-EY-SzZ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="气象国土" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iW8-EY-SzZ">
                                         <rect key="frame" x="0.0" y="70" width="70" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.35660548939999998" green="0.35660548939999998" blue="0.35660548939999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -626,9 +654,12 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvq-Pq-jpv">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
-                                        <state key="normal" image="setting.png">
+                                        <state key="normal" image="qixiang.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="KYn-AD-83l" kind="push" id="0ZB-Fq-Nc3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -714,8 +745,8 @@
         <image name="contact.png" width="70" height="70"/>
         <image name="gate.png" width="70" height="70"/>
         <image name="notification.png" width="70" height="70"/>
+        <image name="qixiang.png" width="70" height="70"/>
         <image name="rain.png" width="70" height="70"/>
-        <image name="setting.png" width="70" height="70"/>
         <image name="water.png" width="70" height="70"/>
         <image name="waterQuality.png" width="70" height="70"/>
         <image name="waterlevel.png" width="70" height="70"/>

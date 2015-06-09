@@ -618,11 +618,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZDWater2/WeatherObject.m"
-            timestampString = "455194445.810981"
+            timestampString = "455421294.046473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "+fetchWithArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -634,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZDWater2/WeatherObject.m"
-            timestampString = "455194444.410219"
+            timestampString = "455421294.046473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
             landmarkName = "+fetchWithArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -666,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZDWater2/WeatherObject.m"
-            timestampString = "455194441.457525"
+            timestampString = "455421294.046473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "+fetchWithArea:"
             landmarkType = "5">
          </BreakpointContent>
@@ -682,12 +682,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZDWater2/WeatherViewController.m"
-            timestampString = "455194547.887955"
+            timestampString = "455421415.725937"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "-updateUI"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZDWater2/QixiangDetailController.m"
+            timestampString = "455508918.098403"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "-updateImageViewAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

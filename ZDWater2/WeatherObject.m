@@ -7,7 +7,6 @@
 //
 
 #import "WeatherObject.h"
-//#import "ASIFormDataRequest.h"
 #import "ASIHTTPRequest.h"
 
 @implementation WeatherObject
@@ -19,10 +18,7 @@
     NSString *str = [NSString stringWithFormat:@"%@t=GetSWeather&results=%@",URL,area];
     str = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:str];
-    
-//    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-//    [request setPostValue:@"GetSWeather" forKey:@"t"];
-//    [request setPostValue:[area stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:@"results"];
+
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request setCompletionBlock:^{
         //成功
@@ -46,7 +42,4 @@ static NSArray *datas = nil;
 {
     return datas;
 }
-
-
-
 @end
